@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link crossorigin="anonymous" rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+</head>
+
+<body>
+	<div class="container">
+		<h2 class="page-header">axios发送Ajax请求</h2>
+		<button class="btn btn-primary">GET</button>
+		<button class="btn btn-danger">POST</button>
+		<button class="btn btn-info">Ajax</button>
+	</div>
+	<script>
+		let btns = document.querySelectorAll('button')
+		//配置baseURL
+		axios.defaults.baseURL = 'http://127.0.0.1:8000'
+		//axios.get(url[confing])
+		btns[0].onclick = function () {
+			axios.get('/axios-server', {
+				//url 参数
+				params: {
+					id: 101,
+					vip: 2
+				},
+				//请求头
+				headers: {
+					name: 'huge',
+					age: 2
+				}
+			}).then(value => {
+				console.log(value);
+			})
+		}
+		// axios.post(url,data,[confing])
+		btns[1].onclick = function () {
+			axios.post('/axios-server', {
+				///请求体
+				username: 'admin', 
+				password: 'admin'
+			}, {
+				//url 参数
+				params: {
+					id: 201,
+					vip: 22
+				},
+				//请求头
+				headers: {
+					name: 'huge',
+					age: 2
+				},
+
+
+			}).then(value => {
+				console.log(value);
+			})
+		}
+		btns[2].onclick = function () {
+			axios({
+				//请求方法
+				method:'POST',
+				// URL
+				url:'/axios-server',
+				//url 参数
+				params: {
+					id: 222,
+					vip: 333
+				},
+				//请求头
+				headers: {
+					name: 'qqq',
+					age: 22
+				},
+				//请求体参数
+				data:{
+					username:'admin',
+					parssword:'admin'
+				}
+			}).then(response=>{
+				// console.log(value);
+				console.log(response.status);
+				console.log(response.statusTest);
+				console.log(response.headers);
+				console.log(response.data);
+				
+			})
+		}
+	</script>
+</body>
+
+</html>
